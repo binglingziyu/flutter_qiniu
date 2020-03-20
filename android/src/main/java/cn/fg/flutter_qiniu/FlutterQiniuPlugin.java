@@ -92,7 +92,7 @@ public class FlutterQiniuPlugin implements MethodCallHandler, EventChannel.Strea
                     uiThreadHandler.post(new Runnable() {
                         @Override
                         public void run() {
-                            eventSink.success(percent)
+                            eventSink.success(percent);
                         }
                     });
                 }
