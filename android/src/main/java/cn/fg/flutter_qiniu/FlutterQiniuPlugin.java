@@ -86,7 +86,7 @@ public class FlutterQiniuPlugin implements MethodCallHandler, EventChannel.Strea
 
         UploadOptions options = new UploadOptions(null, null, false, new UpProgressHandler() {
             @Override
-            public void progress(String key, double percent) {
+            public void progress(String key, final double percent) {
                 if (eventSink != null) {
                     //eventSink.success(percent);
                     uiThreadHandler.post(new Runnable() {
@@ -107,7 +107,7 @@ public class FlutterQiniuPlugin implements MethodCallHandler, EventChannel.Strea
         uploadManager.put(filePath, key, token,
                 new UpCompletionHandler() {
                     @Override
-                    public void complete(String key, ResponseInfo info, JSONObject res) {
+                    public void complete(final String key, final ResponseInfo info, final JSONObject res) {
                         uiThreadHandler.post(new Runnable() {
                             @Override
                             public void run() {
@@ -144,7 +144,7 @@ public class FlutterQiniuPlugin implements MethodCallHandler, EventChannel.Strea
 
         UploadOptions options = new UploadOptions(null, null, false, new UpProgressHandler() {
             @Override
-            public void progress(String key, double percent) {
+            public void progress(final String key, final double percent) {
                 if (eventSink != null) {
                     // eventSink.success(percent);
                     uiThreadHandler.post(new Runnable() {
@@ -165,7 +165,7 @@ public class FlutterQiniuPlugin implements MethodCallHandler, EventChannel.Strea
         uploadManager.put(data, key, token,
                 new UpCompletionHandler() {
                     @Override
-                    public void complete(String key, ResponseInfo info, JSONObject res) {
+                    public void complete(final String key, final ResponseInfo info, final JSONObject res) {
                         uiThreadHandler.post(new Runnable() {
                             @Override
                             public void run() {
