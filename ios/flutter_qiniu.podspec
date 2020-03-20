@@ -17,6 +17,6 @@ A new flutter plugin project.
   s.dependency 'Flutter'
   s.dependency 'Qiniu', "~> 7.3"
 
-  s.ios.deployment_target = '9.0'
+  s.platform = :ios, '8.0'
 end
 
