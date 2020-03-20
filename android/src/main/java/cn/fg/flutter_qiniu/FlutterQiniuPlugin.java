@@ -1,5 +1,7 @@
 package cn.fg.flutter_qiniu;
 
+import android.os.Handler;
+import android.os.Looper;
 import com.qiniu.android.common.FixedZone;
 import com.qiniu.android.common.Zone;
 import com.qiniu.android.http.ResponseInfo;
@@ -24,6 +26,7 @@ import io.flutter.plugin.common.PluginRegistry.Registrar;
  */
 public class FlutterQiniuPlugin implements MethodCallHandler, EventChannel.StreamHandler {
     private EventChannel.EventSink eventSink;
+    private Handler uiThreadHandler = new Handler(Looper.getMainLooper());
 
     private boolean isCancelled = false;
 
@@ -85,7 +88,8 @@ public class FlutterQiniuPlugin implements MethodCallHandler, EventChannel.Strea
             @Override
             public void progress(String key, double percent) {
                 if (eventSink != null) {
-                    eventSink.success(percent);
+                    uiThreadHandler.post(() -> eventSink.success(percent));
+                    //eventSink.success(percent);
                 }
             }
         }, new UpCancellationSignal() {
@@ -132,7 +136,8 @@ public class FlutterQiniuPlugin implements MethodCallHandler, EventChannel.Strea
             @Override
             public void progress(String key, double percent) {
                 if (eventSink != null) {
-                    eventSink.success(percent);
+                    uiThreadHandler.post(() -> eventSink.success(percent));
+                    // eventSink.success(percent);
                 }
             }
         }, new UpCancellationSignal() {
